@@ -3,8 +3,11 @@
 
 #include <openssl/ssl.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <unistd.h>
+#include "../../../include/uri_struct.h"
 #include "../../utils/string/fc_string.h"
-
 
 #define MAX_INPUT_TOKENS  1000
 #define PROTOCOL_SEP      "://"

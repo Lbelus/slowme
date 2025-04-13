@@ -1,10 +1,13 @@
 #define _XOPEN_SOURCE
-#include <time.h>
-#include <main_header.h>
-// #include <my_ssl_header.h>
-#include <my_parser.h>
-#include <my_cookie_jar.h>       
+#include "./cookie_jar.h"
+// #include <main_header.h>
+// #include "../curl/ssl_header.h"
+// #include "../parser/parser.h"
+// #include "../../utils/linkedlist/linkedlist.h"
+
 #include <string.h>
+
+
 
 cmd_ptr_t cmd_ptr_map[] = {
     {__DOMAIN_STR_A_,       set_cookie_domain},

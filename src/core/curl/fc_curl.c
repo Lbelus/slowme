@@ -1,4 +1,5 @@
-#include <main_header.h>
+#include "../../../include/uri_struct.h"
+#include <stdlib.h>
 
 /*
 ################ init_my_curl #################

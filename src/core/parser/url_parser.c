@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "./parser.h"
 /*
 ################ set_var #################
 # Allocates memory for a new string and copies a given number of characters from the source string into the new string.

@@ -26,5 +26,4 @@ int         perform_context_and_connection(ssl_s_t* ssl_data);
 int         https_get_request(char* domain, char* get);
 int         cleanup_ssl(ssl_s_t* ssl_data, int sockfd);
 
-
 #endif

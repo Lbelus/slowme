@@ -1,8 +1,12 @@
 #ifndef __MYCOOKIEJAR_H
 #define __MYCOOKIEJAR_H
 
+// #include <stdlib.h>
+#include <time.h>
+#include "../../utils/linkedlist/linkedlist.h"
 #include "../curl/ssl_header.h"
 
+#include "../parser/parser.h"
 
 #ifndef _COOKIE_S_
 #define _COOKIE_S_
@@ -41,9 +45,6 @@ typedef struct cmd_ptr_s cmd_ptr_t;
 #define __HTTP_TOKEN_      "#HttpOnly_"
 #define __HTTP_TOKEN_LEN_  10
 #define __ZERO_STR_        "0"
-
-
-
 
 
 int         find_ch(char* str, char ch);

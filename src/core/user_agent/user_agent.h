@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include "../../utils/string/fc_string.h"
 #include "../parser/parser.h"
-#include "../../utils/string/fc_string.h"
 
 
 #ifndef _USER_AGENT_STRUCT_
@@ -13,7 +12,7 @@
 struct user_agent_s
 {
     char* designation;
-    char* value
+    char* value;
 };
 typedef struct user_agent_s user_agent_t; 
 #endif

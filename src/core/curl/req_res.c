@@ -1,6 +1,11 @@
-// #include <main_header.h>
-#include "./my_ssl_header.h"
+#include <main_header.h>
+#include "./ssl_header.h"
 #include "../cookie_jar/cookie_jar.h"
+#include "../../../include/uri_struct.h"
+#include "../../utils/linkedlist/linkedlist.h"
+#include "../error_handler/error_handler.h"
+
+
 
 //HTTP
 

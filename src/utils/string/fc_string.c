@@ -86,22 +86,6 @@ int my_strcmp(char* str1, char* str2)
     return ch1 - ch2;
 }
 
-int my_strcmp(char* str1, char* str2)
-{
-    int index = 0;
-    char ch1 = str1[index], ch2 = str2[index];
-    while (ch1 == ch2)
-    {
-        ch1 = str1[index];
-        ch2 = str2[index];
-        if (ch1 == '\0')
-        {
-            return ch1 - ch2;
-        }
-        index += 1;
-    }
-    return ch1 - ch2;
-}
 
 char* my_strcpy(char* str_dest, char* str_src)
 {
@@ -198,6 +182,7 @@ int find_ch(char* str, char ch)
     }
     return index;
 }
+
 
 char** my_strtok(char* str, char ch)
 {

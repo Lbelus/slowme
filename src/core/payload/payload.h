@@ -1,25 +1,10 @@
 #ifndef _MY_PAYLOAD_H_
 #define _MY_PAYLOAD_H_
 
-
-#include <../linkedlist/linkedlist.h>
-#include <../string/fc_string.h>
-#include <../cookie_jar/cookie_jar.h>
-#include <../curl_header/curl_header.h>
-
-// #ifndef _PAYLOAD_S_
-// #define _PAYLOAD_S_
-// struct payload_s
-// {
-//     char*   username;
-//     char*   password;
-//     char*   csrf_token;
-//     int     username_len;
-//     int     password_len;
-//     int     csrf_token_len;
-// };
-// typedef struct payload_s payload_t;
-// #endif
+#include "../../utils/linkedlist/linkedlist.h"
+#include "../../utils/string/fc_string.h"
+#include "../cookie_jar/cookie_jar.h"
+#include "../curl/curl_header.h"
 
 #define __AJAX_STR_         "JSESSIONID"
 #define PAYLOAD_USERN       "session_key="
