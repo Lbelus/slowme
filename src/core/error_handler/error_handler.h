@@ -4,8 +4,9 @@
 // #include "../../../include/main_header.h"
 
 #include <unistd.h>
-#include <stdio.h>
 #include <errno.h>
+#include <stdio.h>
+#include <netdb.h>
 #include "../parser/parser.h"
 #include "../../utils/string/fc_string.h"
 

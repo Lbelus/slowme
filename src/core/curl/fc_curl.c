@@ -1,6 +1,9 @@
 #include "../../../include/uri_struct.h"
 #include <stdlib.h>
 #include "../error_handler/error_handler.h"
+
+
+int     perform_get_request(char* domain,  char* get, int protocol_type);
 /*
 ################ init_my_curl #################
 # This function initializes a 'my_curl' request based on the given URI and user argument.

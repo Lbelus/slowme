@@ -24,10 +24,9 @@ struct parsed_url_struct
 typedef struct parsed_url_struct url_p_s_t;
 #endif
 
-
 #ifndef PARSED_URI
 #define PARSED_URI
-typedef struct parsed_uri_struct
+struct parsed_uri_struct
 {
     char* scheme;
     char* authority;
@@ -38,7 +37,6 @@ typedef struct parsed_uri_struct
 };
 typedef struct parsed_uri_struct uri_p_s_t;
 #endif
-
 
 #ifndef URI_ENUM
 #define URI_ENUM
@@ -63,7 +61,5 @@ struct uri_struct
 };
 typedef struct uri_struct uri_s_t;
 #endif
-
-
 
 #endif
