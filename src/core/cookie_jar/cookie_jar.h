@@ -3,10 +3,24 @@
 
 // #include <stdlib.h>
 #include <time.h>
-#include "../../utils/linkedlist/linkedlist.h"
 #include "../curl/ssl_header.h"
 
 #include "../parser/parser.h"
+// #include "../../utils/linkedlist/linkedlist.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#ifndef NODE_S
+#define NODE_S
+struct node 
+{
+    void* token;
+    struct node* head;
+    struct node* next;
+};
+typedef struct node node_t;
+#endif
 
 #ifndef _COOKIE_S_
 #define _COOKIE_S_

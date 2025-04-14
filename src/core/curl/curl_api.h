@@ -10,6 +10,7 @@
 
 
 
+void free_llist(node_t* head);
 uri_s_t init_my_curl(uri_s_t  uri, char* user_arg);
 int     my_curl(uri_s_t  uri);
 int     clean_my_curl(uri_s_t  uri);

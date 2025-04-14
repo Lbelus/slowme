@@ -17,6 +17,9 @@
 #define _HTTP_LEN_        7
 #define PATH_SEP          '/'
 
+
+void    log_host_error(char* domain);
+
 char* set_var(char* src, int len);
 // char* create_get_request(char* path, char* domain, int total_str_len);
 url_p_s_t* my_url_parser(char* url);

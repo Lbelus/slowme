@@ -21,6 +21,7 @@
 #define COOKIE				"\r\nCookie: "
 #define CSRF_HEADER         "\r\ncsrf-token: "
 
+int     is_request_complete(char* path, char* domain);
 char* concat_string(int argc, ...);
 char* create_get_request(char* path, char* domain);
 char* create_user_a_get_request_(char* path, char* domain, char* user_agent_data);
