@@ -1,13 +1,15 @@
 #define _XOPEN_SOURCE
 #include "./cookie_jar.h"
-// #include <main_header.h>
-// #include "../curl/ssl_header.h"
-// #include "../parser/parser.h"
-// #include "../../utils/linkedlist/linkedlist.h"
 
-#include <string.h>
-
-
+void    set_cookie_name_value(cookie_t* cookie_jar, char* token);
+void    set_cookie_domain(cookie_t* cookie_jar, char* token);
+void    set_cookie_path(cookie_t* cookie_jar, char* token);
+void    set_cookie_secure(cookie_t* cookie_jar, char* token);
+void    set_cookie_date(cookie_t* cookie_jar, char* token);
+void    set_http_only(cookie_t* cookie_jar, char* token);
+int     find_ch(char* str, char ch);
+char**  my_strtok(char* str, char ch);
+char*   itoa(long long value, char* result, int base);
 
 cmd_ptr_t cmd_ptr_map[] = {
     {__DOMAIN_STR_A_,       set_cookie_domain},

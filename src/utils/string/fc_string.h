@@ -2,9 +2,13 @@
 #define __STRING_HEADER_
 
 //my_string.h
-#include <main_header.h>
+// #include <common.h>
 #include <stdlib.h>
 #include <stddef.h>
+
+
+#define MAX_INPUT_TOKENS  1000
+#define ANSWER_BUFFER_SIZE 4096
 
 int     my_strlen(char *str);
 char*   my_strcat(char* str_dest, char* str_src);

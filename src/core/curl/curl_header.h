@@ -22,11 +22,11 @@
 #define CSRF_HEADER         "\r\ncsrf-token: "
 
 int     is_request_complete(char* path, char* domain);
-char* concat_string(int argc, ...);
-char* create_get_request(char* path, char* domain);
+// char* concat_string(int argc, ...);
+// char* create_get_request(char* path, char* domain);
 char* create_user_a_get_request_(char* path, char* domain, char* user_agent_data);
-char* create_post_data_request(char* path, char* domain, char* payload);
-char* itoa(long long value, char* result, int base);
+// char* create_post_data_request(char* path, char* domain, char* payload);
+// char* itoa(long long value, char* result, int base);
 
 char* crop_csrf_token(char* csrf_token);
 

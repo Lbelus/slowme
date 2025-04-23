@@ -3,13 +3,11 @@
 
 // #include <stdlib.h>
 #include <time.h>
-#include "../curl/ssl_header.h"
-
-#include "../parser/parser.h"
-// #include "../../utils/linkedlist/linkedlist.h"
-
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../curl/ssl_header.h"
+#include "../parser/parser.h"
 
 #ifndef NODE_S
 #define NODE_S
@@ -61,17 +59,17 @@ typedef struct cmd_ptr_s cmd_ptr_t;
 #define __ZERO_STR_        "0"
 
 
-int         find_ch(char* str, char ch);
-char**      my_strtok(char* str, char ch);
-char*       itoa(long long value, char* result, int base);
+// int         find_ch(char* str, char ch);
+// char**      my_strtok(char* str, char ch);
+// char*       itoa(long long value, char* result, int base);
 
-void        set_cookie_name_value(cookie_t* cookie_jar, char* token);
-void        set_cookie_domain(cookie_t* cookie_jar, char* token);
-void        set_cookie_path(cookie_t* cookie_jar, char* token);
-void        set_cookie_secure(cookie_t* cookie_jar, char* token);
-int         convert_date_to_second(char* date_str, char* epoch_str);
-void        set_cookie_date(cookie_t* cookie_jar, char* token);
-void        set_http_only(cookie_t* cookie_jar, char* token);
+// void        set_cookie_name_value(cookie_t* cookie_jar, char* token);
+// void        set_cookie_domain(cookie_t* cookie_jar, char* token);
+// void        set_cookie_path(cookie_t* cookie_jar, char* token);
+// void        set_cookie_secure(cookie_t* cookie_jar, char* token);
+// // int         convert_date_to_second(char* date_str, char* epoch_str);
+// void        set_cookie_date(cookie_t* cookie_jar, char* token);
+// void        set_http_only(cookie_t* cookie_jar, char* token);
 
 node_t*     fill_cookie_jar(ssl_s_t* ssl_data);
 cookie_t*   add_cookie(char** tokens);

@@ -1,6 +1,9 @@
 #include "./curl_header.h"
 #include "../user_agent/user_agent.h"
 
+
+char* itoa(long long value, char* result, int base);
+
 char* concat_string(int argc, ...)
 {
     int len = 0;

@@ -1,5 +1,4 @@
-#include "./main_header.h"
-#include <stdlib.h>
+#include "./fc_curl.h"
 
 int main(void)
 {
