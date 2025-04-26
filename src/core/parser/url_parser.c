@@ -1,4 +1,5 @@
 #include "./parser.h"
+char* create_get_request(char* path, char* domain);
 /*
 ################ set_var #################
 # Allocates memory for a new string and copies a given number of characters from the source string into the new string.
@@ -49,7 +50,7 @@ void set_parse_struct(url_p_s_t* url_s, char* domain, char* path)
 		url_s->path = set_var(path, len_path);
 		// url_s->path[len_path] = '\0';
 	} // dirty patch ends
-  	// url_s->req = create_get_request(url_s->path, url_s->domain);
+  	url_s->req = create_get_request(url_s->path, url_s->domain);
 }
 
 /*
@@ -91,7 +92,7 @@ url_p_s_t* my_url_parser(char* url)
 		return NULL;
 	}
   	ptr_path = my_strchr(&ptr_doma[3], PATH_SEP);
-  	set_parse_struct(url_s, &ptr_doma[3], ptr_path);  
+  	set_parse_struct(url_s, &ptr_doma[3], ptr_path); 
   	// if (url_s->req == NULL)
   	// {
     // 	return NULL;

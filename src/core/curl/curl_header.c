@@ -3,6 +3,7 @@
 
 
 char* itoa(long long value, char* result, int base);
+char* create_get_request(char* path, char* domain);
 
 char* concat_string(int argc, ...)
 {
@@ -34,7 +35,7 @@ char* create_get_request(char* path, char* domain)
 	{
 		return NULL;
 	}
-	char* new_req = concat_string(6, 
+	char* new_req = concat_string(5, 
 		GET_MSG_P1,
 		path,
 		REQ_MSG_P2,

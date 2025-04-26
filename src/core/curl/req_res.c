@@ -283,7 +283,7 @@ node_t* req_cookie(char* domain, char* get)
 	return head;
 }
 
-int perform_get_request(char* domain,  char* get, int protocol_type)
+int perform_get_request(char* domain, char* get, int protocol_type)
 {
 	int exit_status = EXIT_FAILURE;
 	if (protocol_type == PROTOCOL_HTTP)
