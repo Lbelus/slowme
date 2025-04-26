@@ -17,7 +17,7 @@
 */
 int send_get_req(char* get, int sockfd)
 {
-  	int len = my_strlen(get);
+  	int len = fc_strlen(get);
   	int err_code;
   	err_code = send(sockfd, get, len, 0);
   	if (err_code == -1)
@@ -42,8 +42,8 @@ node_t* set_http_responser_header(int sockfd)
 	node_t* tmp  = NULL;
 	int index = 0;
 	printf("start response header:\n\n\n");
-    while ((str = my_readline(sockfd)) != NULL // optimization => "\r" search should be implemented at readline level
-	&& my_strcmp(str, "\r") != 0)
+    while ((str = fc_readline(sockfd)) != NULL // optimization => "\r" search should be implemented at readline level
+	&& fc_strcmp(str, "\r") != 0)
     {
 		printf("%s\n", str);
 		// tmp = create_node(str);
@@ -64,13 +64,13 @@ int r_socket_w_out(int sockfd)
 	char* 	str  = NULL;
     char 	buffer[ANSWER_BUFFER_SIZE];
 	int 	size_read = 0;
-	init_my_readline();
+	init_fc_readline();
 	head = set_http_responser_header(sockfd);
-	my_memset(buffer, 0, ANSWER_BUFFER_SIZE); 
+	fc_memset(buffer, 0, ANSWER_BUFFER_SIZE); 
  	while (size_read = read(sockfd, buffer, ANSWER_BUFFER_SIZE))
  	{
     	write(STDOUT_FILENO, buffer, size_read);
-    	my_memset(buffer, 0, ANSWER_BUFFER_SIZE);
+    	fc_memset(buffer, 0, ANSWER_BUFFER_SIZE);
    	}
 	// free_llist(head);
   	close(sockfd);
@@ -106,7 +106,7 @@ int http_request(char* domain,  char* get)
 	int sockfd;
   	int err_code;
   	struct addrinfo hints, *servinfo;
-  	my_memset(&hints, 0, sizeof hints);
+  	fc_memset(&hints, 0, sizeof hints);
   	hints.ai_family = AF_INET;
   	hints.ai_socktype = SOCK_STREAM;
   	err_code = getaddrinfo(domain, __PORT__, &hints, &servinfo);
@@ -221,7 +221,7 @@ int cleanup_ssl(ssl_s_t* ssl_data, int sockfd)
 
 int write_https_req(ssl_s_t* ssl_data, char* get)
 {
-	if (SSL_write(ssl_data->ssl, get, my_strlen(get)) <= 0)
+	if (SSL_write(ssl_data->ssl, get, fc_strlen(get)) <= 0)
 	{
         ERR_print_errors_fp(stderr);
         return EXIT_FAILURE;

@@ -4,8 +4,8 @@ user_agent_t* set_user_agent(char* designation, char* value)
 {
     user_agent_t* user_agent = NULL;
     user_agent = malloc(sizeof(user_agent_t));
-    user_agent->designation = my_strdup(designation);
-    user_agent->value = my_strdup(value);
+    user_agent->designation = fc_strdup(designation);
+    user_agent->value = fc_strdup(value);
     return user_agent;
 }
 user_agent_t* pick_user_agent(char* designation)
@@ -15,10 +15,10 @@ user_agent_t* pick_user_agent(char* designation)
     int             pos         = 0;
 	int             fd          = 0;
     fd = open("./user_agents/user_agents.txt", O_RDONLY, 400);
-    init_my_readline();
-	while ((str = my_readline(fd)) != NULL)
+    init_fc_readline();
+	while ((str = fc_readline(fd)) != NULL)
 	{
-        if (my_strstr(str, designation) != NULL)
+        if (fc_strstr(str, designation) != NULL)
         {
             pos = find_ch(str, '=');
             str[pos] = '\0';

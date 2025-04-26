@@ -23,14 +23,14 @@ int token_array_size(char** resp_tokens)
 */
 char* set_response_code(char* response)
 {
-    int len = my_strlen(response);
+    int len = fc_strlen(response);
     char* str_cpy = malloc(sizeof(char) * len + 1);
-    my_bzero(str_cpy, len + 1);
-    my_memcpy(str_cpy, &response[7], len + 1);
-    char** tokens = my_strtok(str_cpy, '\n');
-    int len_code = my_strlen(&tokens[1][2]);
+    fc_bzero(str_cpy, len + 1);
+    fc_memcpy(str_cpy, &response[7], len + 1);
+    char** tokens = fc_strtok(str_cpy, '\n');
+    int len_code = fc_strlen(&tokens[1][2]);
     char* result = malloc(sizeof(char) * len_code + 1);
-    my_memcpy(result, &tokens[1][2], len_code + 1);
+    fc_memcpy(result, &tokens[1][2], len_code + 1);
     free(tokens);
     free(str_cpy);
     return result;

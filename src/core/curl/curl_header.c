@@ -14,7 +14,7 @@ char* concat_string(int argc, ...)
     va_start(ap, argc);
     while (index < argc)
     {
-        len += my_strlen(va_arg(ap, char*));
+        len += fc_strlen(va_arg(ap, char*));
         index += 1;
     }
     result = (char*)malloc(sizeof(char)* len + 1);
@@ -23,7 +23,7 @@ char* concat_string(int argc, ...)
     index = 0;
     while (index < argc)
     {
-        my_strcat(result, va_arg(ap, char*));
+        fc_strcat(result, va_arg(ap, char*));
         index += 1;
     }
     return result;
@@ -97,7 +97,7 @@ char* msg_user_agent(char* x_li_user_agent, char* user_agent)
 
 void get_content_len(char* payload, char* content_len)
 {
-	int len = my_strlen(payload);
+	int len = fc_strlen(payload);
 	itoa(len, content_len, 10);
 }
 

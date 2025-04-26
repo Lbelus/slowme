@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-void my_revswap(char *ptr, char*ptr1, char tmp_char)
+void fc_revswap(char *ptr, char*ptr1, char tmp_char)
 {
     while(ptr1 < ptr)
     {
@@ -31,7 +31,7 @@ char* itoa(long long value, char* result, int base)
 	if (tmp_value < 0) *ptr++ = '-';
 	*ptr-- = '\0';
 	
-	my_revswap(ptr, ptr1, tmp_char);
+	fc_revswap(ptr, ptr1, tmp_char);
 	
 	return result;
 }
@@ -41,7 +41,7 @@ char* itoa(long long value, char* result, int base)
 // convert character into int.  
 // != itoa 
 // take a buffer and convert it into a value 
-int my_ctoi(char *str, size_t n)
+int fc_ctoi(char *str, size_t n)
 {
     int num = 0;
     int mult = 1;

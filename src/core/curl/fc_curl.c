@@ -5,11 +5,11 @@
 
 int     perform_get_request(char* domain,  char* get, int protocol_type);
 /*
-################ init_my_curl #################
-# This function initializes a 'my_curl' request based on the given URI and user argument.
+################ init_fc_curl #################
+# This function initializes a 'fc_curl' request based on the given URI and user argument.
 # @return {uri_s_t} Initialized uri_s_t structure
 */
-uri_s_t init_my_curl(uri_s_t  uri, char* user_arg)
+uri_s_t init_fc_curl(uri_s_t  uri, char* user_arg)
 {
     int protocol_type = 0;
     uri.type_uri = 0;
@@ -23,7 +23,7 @@ uri_s_t init_my_curl(uri_s_t  uri, char* user_arg)
         if ((protocol_type = get_protocol_from_url(user_arg)))
         {
             uri.type_uri = URL;
-            uri.uri_union.url = my_url_parser(user_arg);
+            uri.uri_union.url = fc_url_parser(user_arg);
             uri.uri_union.url->protocol = protocol_type;
             return uri;
         }
@@ -37,11 +37,11 @@ uri_s_t init_my_curl(uri_s_t  uri, char* user_arg)
 }
 
 /*
-################ my_curl #################
+################ fc_curl #################
 # This function performs a curl-like request using the provided uri_s_t structure.
 # @return {int} Status of the request (EXIT_FAILURE or the result of perform_get_request)
 */
-int my_curl(uri_s_t  uri)
+int fc_curl(uri_s_t  uri)
 {
     int exit_status = EXIT_FAILURE;
     if (uri.type_uri == 0)
@@ -60,11 +60,11 @@ int my_curl(uri_s_t  uri)
 
 
 /*
-################ clean_my_curl #################
+################ clean_fc_curl #################
 # This function cleans up resources associated with the provided uri_s_t structure.
 # @return {int} Status of the cleanup (EXIT_FAILURE or EXIT_SUCCESS)
 */
-int clean_my_curl(uri_s_t  uri)
+int clean_fc_curl(uri_s_t  uri)
 {
     if (uri.type_uri == 0)
     {

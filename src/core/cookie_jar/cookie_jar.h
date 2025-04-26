@@ -60,7 +60,7 @@ typedef struct cmd_ptr_s cmd_ptr_t;
 
 
 // int         find_ch(char* str, char ch);
-// char**      my_strtok(char* str, char ch);
+// char**      fc_strtok(char* str, char ch);
 // char*       itoa(long long value, char* result, int base);
 
 // void        set_cookie_name_value(cookie_t* cookie_jar, char* token);

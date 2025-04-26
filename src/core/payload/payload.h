@@ -1,5 +1,5 @@
-#ifndef _MY_PAYLOAD_H_
-#define _MY_PAYLOAD_H_
+#ifndef _FC_PAYLOAD_H_
+#define _FC_PAYLOAD_H_
 
 #include "../../utils/linkedlist/linkedlist.h"
 #include "../../utils/string/fc_string.h"

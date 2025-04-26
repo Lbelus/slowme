@@ -22,16 +22,16 @@ void    log_host_error(char* domain);
 
 // char* set_var(char* src, int len);
 // char* create_get_request(char* path, char* domain, int total_str_len);
-url_p_s_t* my_url_parser(char* url);
+url_p_s_t* fc_url_parser(char* url);
 void free_url_struct(url_p_s_t* url_s);
 protocol_enum get_protocol_from_url(char* url);
 
 // int token_array_size(char** resp_tokens);
 // char* set_response_code(char* response);
 
-char* init_my_readline();
-char* my_readline(int fd);
-char* my_SSL_readline(SSL* ssl);
+char* init_fc_readline();
+char* fc_readline(int fd);
+char* fc_SSL_readline(SSL* ssl);
 void flush_buffer();
 
 #endif

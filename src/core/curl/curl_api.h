@@ -9,9 +9,9 @@
 #include "../payload/payload.h"
 
 void free_llist(node_t* head);
-uri_s_t init_my_curl(uri_s_t  uri, char* user_arg);
-int     my_curl(uri_s_t  uri);
-int     clean_my_curl(uri_s_t  uri);
+uri_s_t init_fc_curl(uri_s_t  uri, char* user_arg);
+int     fc_curl(uri_s_t  uri);
+int     clean_fc_curl(uri_s_t  uri);
 int     perform_get_request(char* domain,  char* get, int protocol_type);
 
 node_t* req_cookie(char* domain, char* get);

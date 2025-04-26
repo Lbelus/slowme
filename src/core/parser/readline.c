@@ -3,23 +3,23 @@
 int READLINE_READ_SIZE = 256;
 char* rl_buff;
 
-char* init_my_readline()
+char* init_fc_readline()
 {
     rl_buff = malloc(sizeof(char) * READLINE_READ_SIZE);
-    my_memset(rl_buff, '\0',READLINE_READ_SIZE);
+    fc_memset(rl_buff, '\0',READLINE_READ_SIZE);
     return rl_buff;
 }
 
-int my_realloc_rl(int size)
+int fc_realloc_rl(int size)
 {
     int size_buff = 0;
-    size_buff = my_strlen(rl_buff) + 1;
+    size_buff = fc_strlen(rl_buff) + 1;
     char tmp_buff[size_buff];
     int total_size = size + size_buff;
-    my_strcpy(tmp_buff, rl_buff);
+    fc_strcpy(tmp_buff, rl_buff);
     free(rl_buff);
     rl_buff = malloc(total_size + 1);
-    my_strcpy(rl_buff, tmp_buff);
+    fc_strcpy(rl_buff, tmp_buff);
     rl_buff[size_buff] = '\0';
     return size + size_buff;
 }
@@ -52,7 +52,7 @@ bool is_newline(int size)
 }
 
 
-char* my_readline(int fd)
+char* fc_readline(int fd)
 {
     if (fd == -1)
     {
@@ -71,16 +71,16 @@ char* my_readline(int fd)
     int jndex = 0;
     int byte_count = 0;
 
-    size = my_strlen(rl_buff) + 1;
+    size = fc_strlen(rl_buff) + 1;
     cursor = seek_newline(size);
     // fill buff
     while (is_newline(size) == false 
         && (byte_count = read(fd, tmp_buff, READLINE_READ_SIZE - 1)))
     {
         tmp_buff[byte_count] = '\0';
-        my_realloc_rl(byte_count);
-        my_strcat(rl_buff, tmp_buff);
-        size = my_strlen(rl_buff) + 1;
+        fc_realloc_rl(byte_count);
+        fc_strcat(rl_buff, tmp_buff);
+        size = fc_strlen(rl_buff) + 1;
         cursor = seek_newline(size);
     }
     new = malloc(sizeof(char)*cursor +1);
@@ -128,7 +128,7 @@ char* my_readline(int fd)
 }
 
 
-char* my_SSL_readline(SSL* ssl)
+char* fc_SSL_readline(SSL* ssl)
 {
     if (ssl == NULL)
     {
@@ -147,7 +147,7 @@ char* my_SSL_readline(SSL* ssl)
     int jndex = 0;
     int byte_count = 0;
 
-    size = my_strlen(rl_buff) + 1;
+    size = fc_strlen(rl_buff) + 1;
     cursor = seek_newline(size);
     // fill buff
     while (is_newline(size) == false 
@@ -160,9 +160,9 @@ char* my_SSL_readline(SSL* ssl)
 
         printf("byte count is:%i\n", byte_count);
         tmp_buff[byte_count] = '\0';
-        my_realloc_rl(byte_count);
-        my_strcat(rl_buff, tmp_buff);
-        size = my_strlen(rl_buff) + 1;
+        fc_realloc_rl(byte_count);
+        fc_strcat(rl_buff, tmp_buff);
+        size = fc_strlen(rl_buff) + 1;
         cursor = seek_newline(size);
     }
     new = malloc(sizeof(char)*cursor + 1);
@@ -213,9 +213,9 @@ char* my_SSL_readline(SSL* ssl)
 
 void flush_buffer()
 {
-    int len = my_strlen(rl_buff);
+    int len = fc_strlen(rl_buff);
     write(STDOUT_FILENO, rl_buff, len);
     free(rl_buff);
     // flushall();
-    // my_bzero(rl_buff, READLINE_READ_SIZE);
+    // fc_bzero(rl_buff, READLINE_READ_SIZE);
 }

@@ -1,5 +1,5 @@
-#ifndef __MY_SSL_HEADER_
-#define __MY_SSL_HEADER_
+#ifndef __FC_SSL_HEADER_
+#define __FC_SSL_HEADER_
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>

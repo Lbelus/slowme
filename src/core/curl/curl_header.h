@@ -1,5 +1,5 @@
-#ifndef __MY_CURL_HEADER
-#define __MY_CURL_HEADER
+#ifndef __FC_CURL_HEADER
+#define __FC_CURL_HEADER
 
 #include <stdarg.h>
 

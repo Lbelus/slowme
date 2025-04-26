@@ -10,8 +10,8 @@ char* create_get_request(char* path, char* domain);
 char* set_var(char* src, int len)
 {
   	char* new_str = malloc(sizeof(char)*len + 1);
-  	my_bzero(new_str, len + 1);
-  	my_memcpy(new_str, src, len);
+  	fc_bzero(new_str, len + 1);
+  	fc_memcpy(new_str, src, len);
   	return new_str;
 }
 
@@ -20,8 +20,8 @@ int diff_len(char* str1, char* str2)
 	int len_a 	= 0;
 	int len_b 	= 0;
 	int result 	= 0; 
-	len_a = my_strlen(str1);
-	len_b = my_strlen(str2);
+	len_a = fc_strlen(str1);
+	len_b = fc_strlen(str2);
 	result = len_a - len_b;
 	return result;
 }
@@ -38,7 +38,7 @@ int diff_len(char* str1, char* str2)
 void set_parse_struct(url_p_s_t* url_s, char* domain, char* path)
 {
 	int len_dom = diff_len(domain, path);
-  	int len_path = my_strlen(path) + 1;
+  	int len_path = fc_strlen(path) + 1;
   	url_s->domain = set_var(domain, len_dom);
 	// url_s->domain[len_dom]= '\0';
 	if (path == NULL)  // dirty patch starts
@@ -60,11 +60,11 @@ void set_parse_struct(url_p_s_t* url_s, char* domain, char* path)
 */
 protocol_enum get_protocol_from_url(char* url)
 {
-    if (my_strncmp(url, _HTTP__, _HTTP_LEN_) == 0)
+    if (fc_strncmp(url, _HTTP__, _HTTP_LEN_) == 0)
 	{
         return PROTOCOL_HTTP;
     } 
-	else if (my_strncmp(url, _HTTPS__, _HTTPS_LEN_) == 0)
+	else if (fc_strncmp(url, _HTTPS__, _HTTPS_LEN_) == 0)
 	{
         return PROTOCOL_HTTPS;
     } 
@@ -75,23 +75,23 @@ protocol_enum get_protocol_from_url(char* url)
 }
 
 /*
-################ my_urL_parser #################
+################ fc_urL_parser #################
 # Parses a URL into its domain and path components, and then creates a GET request.
 # @return {url_p_s_t*} A pointer to the parsed URL structure, which contains the domain, path, and GET request.
 */
-url_p_s_t* my_url_parser(char* url)
+url_p_s_t* fc_url_parser(char* url)
 {
   	url_p_s_t* url_s = malloc(sizeof(url_p_s_t));
   	char* ptr_doma = NULL;
   	char* ptr_path = NULL;
-  	ptr_doma  = my_strstr(url, PROTOCOL_SEP);
+  	ptr_doma  = fc_strstr(url, PROTOCOL_SEP);
 	if (ptr_doma == NULL)
 	{
 		log_host_error(url);
 		free(url_s);
 		return NULL;
 	}
-  	ptr_path = my_strchr(&ptr_doma[3], PATH_SEP);
+  	ptr_path = fc_strchr(&ptr_doma[3], PATH_SEP);
   	set_parse_struct(url_s, &ptr_doma[3], ptr_path); 
   	// if (url_s->req == NULL)
   	// {

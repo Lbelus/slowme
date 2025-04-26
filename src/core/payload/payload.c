@@ -8,7 +8,7 @@ char* get_csrf_token(node_t* head)
     while (iterator != NULL)
     {
         cookie = (cookie_t*)iterator->token;
-        if (my_strstr(cookie->cookie_name, __AJAX_STR_))
+        if (fc_strstr(cookie->cookie_name, __AJAX_STR_))
         {   
             return cookie->cookie_value;
         }
@@ -25,7 +25,7 @@ char* crop_csrf_token(char* csrf_token)
     int pos         = 0;
     int len         = 0; 
     char* cpy_str   = NULL;
-    len             = my_strlen(csrf_token) - 1;
+    len             = fc_strlen(csrf_token) - 1;
     cpy_str         = (char*)malloc(sizeof(char) * len);
     while (index < len)
     {

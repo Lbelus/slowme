@@ -40,7 +40,7 @@ int is_request_complete(char* path, char* domain)
 */
 int is_not_url(char* uri)
 {
-  char* result = my_strstr(uri, PROTOCOL_SEP);
+  char* result = fc_strstr(uri, PROTOCOL_SEP);
   if (result == NULL)
   {
     write(STDERR_FILENO, ENOTURL, ENOTURL_SIZE);
@@ -56,10 +56,10 @@ int is_not_url(char* uri)
 */
 void log_host_error(char* domain)
 {
-  int len = my_strlen(domain) + ERESOLVEHOST_SIZE + 1;
+  int len = fc_strlen(domain) + ERESOLVEHOST_SIZE + 1;
   char str[len];
-  my_bzero(str, len);
-  my_strcpy(str, ERESOLVEHOST);
-  my_strcat(str, domain);
+  fc_bzero(str, len);
+  fc_strcpy(str, ERESOLVEHOST);
+  fc_strcat(str, domain);
   write(STDERR_FILENO, str, len);
 }

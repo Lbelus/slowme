@@ -22,7 +22,7 @@ node_t* login(char* username, char* password, char* user_agent_designation, char
 url_p_s_t* set_parsed_url_struct(char* url)
 {
     uri_s_t uri;
-    uri = init_my_curl(uri, url);
+    uri = init_fc_curl(uri, url);
     url_p_s_t* url_s = uri.uri_union.url;
     return url_s;
 }

@@ -2,11 +2,11 @@
 #define __LINKEDIN_API_H_
 
 #include <main_header.h>
-#include <my_linkedlist.h>
-#include <my_user_agent.h>
-#include <my_uri_structs.h>
-#include <my_cookie_jar.h>
-#include <my_payload.h>
+#include <fc_linkedlist.h>
+#include <fc_user_agent.h>
+#include <fc_uri_structs.h>
+#include <fc_cookie_jar.h>
+#include <fc_payload.h>
 
 
 #define LIN_AUTH_ADDR       "https://www.linkedin.com/uas/authenticate"
