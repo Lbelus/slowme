@@ -4,7 +4,6 @@ char* get_csrf_token(node_t* head)
 {
     node_t* iterator    = head;
     cookie_t* cookie    = NULL;
-    int len = 0;
     while (iterator != NULL)
     {
         cookie = (cookie_t*)iterator->token;

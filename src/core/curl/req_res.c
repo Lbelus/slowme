@@ -39,16 +39,11 @@ node_t* set_http_responser_header(int sockfd)
 {
 	char* 	str  = NULL;
 	node_t* head = NULL;
-	node_t* tmp  = NULL;
-	int index = 0;
 	printf("start response header:\n\n\n");
     while ((str = fc_readline(sockfd)) != NULL // optimization => "\r" search should be implemented at readline level
 	&& fc_strcmp(str, "\r") != 0)
     {
 		printf("%s\n", str);
-		// tmp = create_node(str);
-		// insert_at_head(&head, tmp);
-		index += 1;
 		free(str);
 	}
 	printf("encountered a \\r end of known header\n\n\n");
@@ -59,20 +54,17 @@ node_t* set_http_responser_header(int sockfd)
 
 int r_socket_w_out(int sockfd)
 {
-	node_t* head = NULL;
-	node_t* tmp  = NULL;
-	char* 	str  = NULL;
+	// node_t* head = NULL;
     char 	buffer[ANSWER_BUFFER_SIZE];
 	int 	size_read = 0;
 	init_fc_readline();
-	head = set_http_responser_header(sockfd);
+	set_http_responser_header(sockfd); // returns Head but not used as of late
 	fc_memset(buffer, 0, ANSWER_BUFFER_SIZE); 
- 	while (size_read = read(sockfd, buffer, ANSWER_BUFFER_SIZE))
+ 	while ((size_read = read(sockfd, buffer, ANSWER_BUFFER_SIZE)))
  	{
     	write(STDOUT_FILENO, buffer, size_read);
     	fc_memset(buffer, 0, ANSWER_BUFFER_SIZE);
    	}
-	// free_llist(head);
   	close(sockfd);
 	return EXIT_SUCCESS;
 }
@@ -210,7 +202,7 @@ int create_socket(char *hostname, int port)
     return sockfd;
 }
 
-int cleanup_ssl(ssl_s_t* ssl_data, int sockfd)
+void cleanup_ssl(ssl_s_t* ssl_data, int sockfd)
 {
 
 	SSL_free(ssl_data->ssl);

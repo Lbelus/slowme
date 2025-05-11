@@ -74,7 +74,7 @@ void free_llist(node_t* head)
     }
 }
 
-node_t* cookie_splicer(node_t** head, char* str)
+void cookie_splicer(node_t** head, char* str)
 {
     char**      tokens   = NULL;
     cookie_t*   cookie   = NULL;
@@ -163,7 +163,6 @@ void execute_cmd(cookie_t* cookie_jar, char* token)
 int cookies_len(node_t* head)
 {
     int len   = 0;
-    int index = 0;
     node_t* iterator = head;
     cookie_t* cookie = NULL;
     while (iterator->next != NULL)
@@ -172,7 +171,6 @@ int cookies_len(node_t* head)
         len += fc_strlen(cookie->cookie_name);
         len += fc_strlen(cookie->cookie_value);
         len += 3; // extra char '=' & '; ' per cookie
-        index += 1;
         iterator = iterator->next;
     }
     return len;
@@ -225,6 +223,7 @@ void set_cookie_domain(cookie_t* cookie_jar, char* token)
 
 void set_http_only(cookie_t* cookie_jar, char* token)
 {
+    (void)token; // sue me
     char* new_str = NULL;
     int len = fc_strlen(cookie_jar->domain) + 1 + __HTTP_TOKEN_LEN_;
     new_str = malloc(len);
