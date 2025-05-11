@@ -20,7 +20,12 @@ RUN apt-get update && \
     python3 \             
     python3-pip \         
     python3-dev \     
-    python3-venv
+    python3-venv \
+    ninja-build \
+    meson \
+    libffi-dev \
+    libgit2-dev \ 
+    libcriterion-dev
 
 # Clean up to reduce image size
 RUN   apt-get autoremove -y && \

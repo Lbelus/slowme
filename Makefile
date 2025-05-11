@@ -1,29 +1,44 @@
-TARGET_EXEC := my_curl
+TARGET_EXEC := fc_curl
 cc := clang
 BUILD_DIR := ./build
 SRC_DIRS := ./src
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror -lssl -lcrypto
-LDFLAGS = $(CFLAGS)
 
+# https://www.gnu.org/software/make/manual/html_node/Setting.html
 export C_INCLUDE_PATH=include/
+
+DEBUG ?= 0
+
+# Compiler and linker flags
+WARNINGS := -Wall -Wextra -Werror
+DEBUG_FLAGS := -fsanitize=address -g
+RELEASE_FLAGS := -O2
+
+ifeq ($(DEBUG), 1)
+    CFLAGS := $(WARNINGS) $(DEBUG_FLAGS)
+    LDFLAGS := $(DEBUG_FLAGS) -lssl -lcrypto `pkg-config --libs criterion`
+    BIN_NAME := debug
+else
+    CFLAGS := $(RELEASE_FLAGS)
+    LDFLAGS := -lssl -lcrypto
+    BIN_NAME := $(TARGET_EXEC)
+endif
+
+.PHONY: all clean fclean debug debugc
+
 
 # Find all the C files we want to compile
 # Note the single quotes around the * expressions. Make will incorrectly expand these otherwise.
-
 SRCS := $(shell find $(SRC_DIRS) -name '*.c')
-SRCS := $(filter-out $(SRC_DIRS)/curlapimodule.c, $(SRCS))
-# rm $(BUIS)
-# BUIS := $(shell find $(BUILD_DIR) -name '*.o')
-# String substitution for every C file.
-# As an example, hello.c turns into ./build/hello.c.o
+
+# SRCS := $(filter-out $(SRC_DIRS)/curlapimodule.c, $(SRCS))
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
-# String substitution (suffix version without %).
 # As an example, ./build/hello.c.o turns into ./build/hello.c.d
 DEPS := $(OBJS:.o=.d)
 
 # Every folder in ./src will need to be passed to GCC so that it can find header files
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+
 # Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag
 INC_FLAGS := $(addprefix -IC,$(INC_DIRS))
 
@@ -31,32 +46,35 @@ INC_FLAGS := $(addprefix -IC,$(INC_DIRS))
 # These files will have .d instead of .o as the output.
 XTRAFLAGS := $(INC_FLAGS) -g -MMD -MP
 
-# The final build step.
+.PHONY: all clean fclean debug debugc
+# ---------------
 
-$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
-	$(CC) $(OBJS) -o $@ 
-	cp $(BUILD_DIR)/$(TARGET_EXEC)  ./ $(CFLAGS)
+# It's the final build step dumdum du.
+$(BUILD_DIR)/$(BIN_NAME): $(OBJS)
+	$(cc) $(OBJS) -o $@ $(LDFLAGS)
+	cp $@ ./
+
 # Build step for C source
 $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(XTRAFLAGS) -c $< -o $@
-#$(LDFLAGS)
-.PHONY: clean fclean debug debugc
+	$(cc) $(CFLAGS) $(XTRAFLAGS) -c $< -o $@
+# ---------------
+
 clean:
-	rm $(shell find $(BUILD_DIR) -name '*.o')
-	rm $(BUILD_DIR)/$(TARGET_EXEC)
-	rm $(TARGET_EXEC)
+	rm -f $(OBJS) $(DEPS)
+	rm -f $(BUILD_DIR)/$(TARGET_EXEC) $(BUILD_DIR)
+	rm -f $(TARGET_EXEC) debug
 
 fclean:
-	rm -r $(BUILD_DIR)
-	rm $(TARGET_EXEC)
+	rm -rf $(BUILD_DIR)
+	rm -f $(TARGET_EXEC) debug
 
-debug: $(OBJS)
-	$(CC) -g $(OBJS) -o $@ $(LDFLAGS)
+debug:
+	$(MAKE) DEBUG=1
 
-debugc:	
-	rm -r $(BUILD_DIR)
-	rm debug
+debugc:
+	rm -f debug
+	rm -f $(BUILD_DIR)
 
 # Include the .d makefiles. The - at the front suppresses the errors of missing
 # Makefiles. Initially, all the .d files will be missing, and we don't want those
