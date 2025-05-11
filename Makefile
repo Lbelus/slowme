@@ -7,6 +7,7 @@ SRC_DIRS := ./src
 export C_INCLUDE_PATH=include/
 
 DEBUG ?= 0
+TEST ?= 0
 
 # Compiler and linker flags
 WARNINGS := -Wall -Wextra -Werror
@@ -15,10 +16,16 @@ RELEASE_FLAGS := -O2
 
 ifeq ($(DEBUG), 1)
     CFLAGS := $(WARNINGS) $(DEBUG_FLAGS)
-    LDFLAGS := $(DEBUG_FLAGS) -lssl -lcrypto `pkg-config --libs criterion`
-    BIN_NAME := debug
+    LDFLAGS := $(DEBUG_FLAGS) -lssl -lcrypto 
+	BIN_NAME := debug
+else ifeq ($(TEST), 1)
+	SRC_DIRS := ./src ./tests
+	CFLAGS := $(RELEASE_FLAGS)
+	TEST_LDFLAGS := $(shell pkg-config --libs criterion)
+	LDFLAGS := $(DEBUG_FLAGS) -lssl -lcrypto $(TEST_LDFLAGS) 
+	BIN_NAME := tollTroll
 else
-    CFLAGS := $(RELEASE_FLAGS)
+	CFLAGS := $(RELEASE_FLAGS)
     LDFLAGS := -lssl -lcrypto
     BIN_NAME := $(TARGET_EXEC)
 endif
@@ -28,9 +35,17 @@ endif
 
 # Find all the C files we want to compile
 # Note the single quotes around the * expressions. Make will incorrectly expand these otherwise.
-SRCS := $(shell find $(SRC_DIRS) -name '*.c')
 
-# SRCS := $(filter-out $(SRC_DIRS)/curlapimodule.c, $(SRCS))
+ifeq ($(TEST), 1)
+    # Add test directory and remove main.c from sources
+    SRC_DIRS := ./src ./tests
+    SRCS := $(filter-out ./src/main.c, $(shell find $(SRC_DIRS) -name '*.c'))
+else
+    SRC_DIRS := ./src
+    SRCS := $(shell find $(SRC_DIRS) -name '*.c')
+endif
+
+
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
 # As an example, ./build/hello.c.o turns into ./build/hello.c.d
@@ -46,10 +61,10 @@ INC_FLAGS := $(addprefix -IC,$(INC_DIRS))
 # These files will have .d instead of .o as the output.
 XTRAFLAGS := $(INC_FLAGS) -g -MMD -MP
 
-.PHONY: all clean fclean debug debugc
+.PHONY: all clean fclean debug debugc test
 # ---------------
 
-# It's the final build step dumdum du.
+# It's the final build step dumdum duh.
 $(BUILD_DIR)/$(BIN_NAME): $(OBJS)
 	$(cc) $(OBJS) -o $@ $(LDFLAGS)
 	cp $@ ./
@@ -61,20 +76,20 @@ $(BUILD_DIR)/%.c.o: %.c
 # ---------------
 
 clean:
-	rm -f $(OBJS) $(DEPS)
-	rm -f $(BUILD_DIR)/$(TARGET_EXEC) $(BUILD_DIR)
-	rm -f $(TARGET_EXEC) debug
+	rm $(shell find $(BUILD_DIR) -name '*.o')
+	rm $(BUILD_DIR)/$(TARGET_EXEC)
+	rm $(TARGET_EXEC) debug tollTroll
 
 fclean:
 	rm -rf $(BUILD_DIR)
-	rm -f $(TARGET_EXEC) debug
+	rm -f $(TARGET_EXEC) debug tollTroll
 
 debug:
 	$(MAKE) DEBUG=1
 
-debugc:
-	rm -f debug
-	rm -f $(BUILD_DIR)
+tt:
+	$(MAKE) TEST=1
+	./tollTroll
 
 # Include the .d makefiles. The - at the front suppresses the errors of missing
 # Makefiles. Initially, all the .d files will be missing, and we don't want those

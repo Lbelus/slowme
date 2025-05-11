@@ -25,23 +25,35 @@ The tool allows fine-grained control over the behavior of the attack through var
 
 ### Architecture overview / flowchart
 
+### Unit test 
 
+Project relies on Criterion;
 
 
 ## Installation
 
+### Step 1. setup the Environment.
 
+Using docker, from the ``project root`` dir.
+- Build the image:
+```bash
+docker build -t img_fc_curl .
+```
+
+- Run the container:
+```bash
+docker run -it -v /path/to/dir/:/my/workspace/ --name cont_fc_curl img_fc_curl /bin/bash
+```
 
 ## Usage
 
-
-
-
+Read the Makefile
 
 ### The Core Team
 * [Lorris BELUS](//github.com/Lbelus) - Developer
-
+```
 ()=()
 (^;^)
 C × C
 ()_()
+```
